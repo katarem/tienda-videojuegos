@@ -6,4 +6,11 @@
   <version>1.0</version>
   <name>Archetype - TiendaVideojuegos</name>
   <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>2.15.2</version>
+    </dependency>
+  </dependencies>
 </project>
