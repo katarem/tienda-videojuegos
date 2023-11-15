@@ -4,13 +4,16 @@
   <groupId>aed.practica2</groupId>
   <artifactId>TiendaVideojuegos</artifactId>
   <version>1.0</version>
+  <packaging>pom</packaging>
   <name>Archetype - TiendaVideojuegos</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <maven.compile.source>20</maven.compile.source>
+    <maven.compiler.target>20</maven.compiler.target>
+  </properties>
+  <modules>
+    <module>backend</module>
+  </modules>
   <dependencies>
-    <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-xml</artifactId>
-      <version>2.15.2</version>
-    </dependency>
   </dependencies>
 </project>

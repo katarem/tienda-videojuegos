@@ -8,15 +8,13 @@ import java.util.List;
 public interface IDBService {
     List<Producto> getProductos();
     List<Cuenta> getCuentas();
-    void addProducto(String productID);
-    void addCuenta(String userID);
+    void addProducto(Producto p);
+    void addCuenta(Cuenta c);
 
     void removeCuenta(String userID);
 
-    void removeProducto(String productID);
-
+    void removeProducto(int productID);
 
     void close();
-
 
 }

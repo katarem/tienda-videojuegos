@@ -1,6 +1,11 @@
 package aed.practica2.backend.models;
 
+import aed.practica2.backend.Security;
+
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Objects;
 
 /**
@@ -12,15 +17,22 @@ public class Cuenta implements Serializable{
     private String password;
     private String email;
     private String profileImage;
+    private Roles rol;
 
-    public Cuenta(String username, String password, String email, String profileImage) {
+    public Cuenta(String username, String password, String email, String profileImage, Roles rol) {
         this.username = username;
-        this.password = password;
+        setPassword(password);
         this.email = email;
         this.profileImage = profileImage;
+        if(rol==null) this.rol = Roles.USER;
+        else this.rol = rol;
     }
 
     public Cuenta(){ }
+
+    public Roles getRol(){ return rol; }
+
+    public void setRol(Roles rol) { this.rol = rol; }
 
     public String getUsername() {
         return username;
@@ -35,7 +47,8 @@ public class Cuenta implements Serializable{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+       if(password.length()!=44) this.password = Security.hashPassword(password);
+       else this.password = password;
     }
 
     public String getEmail() {
@@ -59,12 +72,12 @@ public class Cuenta implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cuenta cuenta = (Cuenta) o;
-        return Objects.equals(username, cuenta.username) && Objects.equals(password, cuenta.password) && Objects.equals(email, cuenta.email) && Objects.equals(profileImage, cuenta.profileImage);
+        return Objects.equals(username, cuenta.username) && Objects.equals(password, cuenta.password) && Objects.equals(email, cuenta.email) && Objects.equals(profileImage, cuenta.profileImage) && rol == cuenta.rol;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, email, profileImage);
+        return Objects.hash(username, password, email, profileImage, rol);
     }
 
     @Override
@@ -74,6 +87,7 @@ public class Cuenta implements Serializable{
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", profileImage='" + profileImage + '\'' +
+                ", rol=" + rol +
                 '}';
     }
 }

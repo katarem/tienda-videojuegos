@@ -25,14 +25,13 @@ public class DBManager implements IDBManager{
     }
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private String PRODUCTOSDBPATH = ClassLoader.getSystemResource("productos.json").getPath();
-    private String CUENTASDBPATH = ClassLoader.getSystemResource("cuentas.json").getPath();
+    private String PRODUCTOSDBPATH = "./backend/src/main/resources/productos.json";
+    private String CUENTASDBPATH = "./backend/src/main/resources/cuentas.json";
 
     @Override
     public ArrayList<Producto> readProductos() {
         try(FileReader reader = new FileReader(PRODUCTOSDBPATH)){
-            ArrayList<Producto> productos = mapper.readValue(reader, new TypeReference<ArrayList<Producto>>(){});
-            return productos;
+            return mapper.readValue(reader, new TypeReference<>() {});
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
