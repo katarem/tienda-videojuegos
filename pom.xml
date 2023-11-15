@@ -10,10 +10,10 @@
   <properties>
     <maven.compile.source>20</maven.compile.source>
     <maven.compiler.target>20</maven.compiler.target>
+      <maven.compiler.release>20</maven.compiler.release>
   </properties>
   <modules>
     <module>backend</module>
+      <module>frontend</module>
   </modules>
-  <dependencies>
-  </dependencies>
 </project>
