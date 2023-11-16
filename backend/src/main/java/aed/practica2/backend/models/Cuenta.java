@@ -1,11 +1,8 @@
 package aed.practica2.backend.models;
 
-import aed.practica2.backend.Security;
+import aed.practica2.backend.utils.Security;
 
 import java.io.Serializable;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Objects;
 
 /**

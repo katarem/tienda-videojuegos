@@ -1,4 +1,4 @@
-package aed.practica2.backend;
+package aed.practica2.backend.utils;
 
 import aed.practica2.backend.models.Cuenta;
 
@@ -26,7 +26,7 @@ public class Security {
 
     public static String login(List<Cuenta> users, String username, String password){
         var usuarioExiste = users.stream().filter(user -> user.getUsername().equals(username)).findFirst();
-        if(usuarioExiste.isEmpty()) return "Usuario no encontrado.";
+        if(usuarioExiste.isEmpty()) return "No existe cuenta con ese username.";
         else if(usuarioExiste.get().getPassword().equals(hashPassword(password))) return "Usuario logeado! bienvenido " + usuarioExiste.get().getEmail();
         else return "Contraseña incorrecta";
     }

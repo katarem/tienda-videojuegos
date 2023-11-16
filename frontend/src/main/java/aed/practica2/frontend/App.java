@@ -1,5 +1,6 @@
 package aed.practica2.frontend;
 
+import aed.practica2.backend.db.DBService;
 import aed.practica2.frontend.controllers.LoginController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,9 +9,11 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     public static Stage stage;
+
+    public static DBService service;
     @Override
     public void start(Stage stage) {
-
+        service = new DBService();
         App.stage = stage;
         LoginController h = new LoginController();
         App.stage.setTitle("APP");
