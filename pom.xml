@@ -5,7 +5,7 @@
   <artifactId>TiendaVideojuegos</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
-  <name>Archetype - TiendaVideojuegos</name>
+  <name>TiendaVideojuegos</name>
   <url>http://maven.apache.org</url>
   <properties>
     <maven.compile.source>20</maven.compile.source>

@@ -13,7 +13,6 @@ public class App extends Application {
 
         App.stage = stage;
         LoginController h = new LoginController();
-
         App.stage.setTitle("APP");
         App.stage.setResizable(false);
         App.stage.setScene(new Scene(h.getView()));
