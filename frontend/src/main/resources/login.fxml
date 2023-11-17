@@ -36,7 +36,7 @@
                   <Font name="Gentium Basic Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldPassword">
+            <TextField fx:id="textFieldPassword" style="-fx-background-insets: 0;">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="15.0" />
                </VBox.margin>
