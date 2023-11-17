@@ -1,0 +1,17 @@
+#buttonLogin {
+    -fx-background-color: #9797fb;
+    -fx-text-fill: white;
+}
+
+#buttonLogin:hover {
+    -fx-background-color: #e3c2fd;
+}
+
+#buttonRegister {
+    -fx-background-color: #9797fb;
+    -fx-text-fill: white;
+}
+
+#buttonRegister:hover {
+    -fx-background-color: #e3c2fd;
+}
