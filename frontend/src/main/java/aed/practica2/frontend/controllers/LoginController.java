@@ -1,5 +1,7 @@
 package aed.practica2.frontend.controllers;
 
+import aed.practica2.backend.models.Cuenta;
+import aed.practica2.backend.models.Roles;
 import aed.practica2.backend.utils.Security;
 import aed.practica2.frontend.App;
 import aed.practica2.frontend.Main;
@@ -56,7 +58,20 @@ public class LoginController implements Initializable {
 
     @FXML
     private void register(){
-        //TODO hacer la funcion XD
+        var username = textFieldUsername.getText();
+        var password = textFieldPassword.getText();
+
+        //Usuario existe?
+        var existe = App.service.getCuentas().stream()
+                .filter(cuenta -> cuenta.getUsername().equals(username))
+                .findFirst();
+        existe.ifPresent(cuenta -> showError("Usuario ya existente","El usuario " +
+                                                cuenta.getUsername() + " ya existe"));
+
+        //Registro válido
+        var newCuenta = new Cuenta(username,Security.hashPassword(password),"Correo no configurado.","", Roles.USER);
+        App.service.addCuenta(newCuenta);
+        success("Usuario registrado correctamente!","AHora ya puede entrar usando su usuario y contraseña.");
     }
 
 

@@ -19,6 +19,7 @@ public class App extends Application {
         App.stage.setTitle("APP");
         App.stage.setResizable(false);
         App.stage.setScene(new Scene(h.getView()));
+        App.stage.setOnCloseRequest(e -> service.close());
         App.stage.show();
     }
 
