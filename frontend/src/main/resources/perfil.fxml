@@ -41,5 +41,6 @@
             <Image url="@img/rango.jpg" />
          </image></ImageView>
       <Button layoutX="516.0" layoutY="597.0" mnemonicParsing="false" text="Volver" />
+      <Button layoutX="494.0" layoutY="548.0" mnemonicParsing="false" text="Editar Nombre" />
    </children>
 </Pane>
