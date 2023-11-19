@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField textFieldUsername;
     @FXML
-    private TextField textFieldPassword;
+    private PasswordField textFieldPassword;
 
     public LoginController(){
         try{
@@ -61,17 +61,20 @@ public class LoginController implements Initializable {
         var username = textFieldUsername.getText();
         var password = textFieldPassword.getText();
 
+        System.out.println("Comprobando existencias...");
         //Usuario existe?
         var existe = App.service.getCuentas().stream()
                 .filter(cuenta -> cuenta.getUsername().equals(username))
                 .findFirst();
-        existe.ifPresent(cuenta -> showError("Usuario ya existente","El usuario " +
-                                                cuenta.getUsername() + " ya existe"));
 
-        //Registro válido
-        var newCuenta = new Cuenta(username,Security.hashPassword(password),"Correo no configurado.","", Roles.USER);
-        App.service.addCuenta(newCuenta);
-        success("Usuario registrado correctamente!","AHora ya puede entrar usando su usuario y contraseña.");
+        if(existe.isPresent()){
+            showError("Usuario ya existente","El usuario " + existe.get().getUsername() + " ya existe");
+        } else {
+            //Registro válido
+            var newCuenta = new Cuenta(username, Security.hashPassword(password), "Correo no configurado.", "", Roles.USER);
+            App.service.addCuenta(newCuenta);
+            success("Usuario registrado correctamente!", "AHora ya puede entrar usando su usuario y contraseña.");
+        }
     }
 
 
