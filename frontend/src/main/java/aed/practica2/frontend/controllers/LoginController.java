@@ -8,6 +8,7 @@ import aed.practica2.frontend.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -50,9 +51,13 @@ public class LoginController implements Initializable {
         var password = textFieldPassword.getText();
         var cuentas = App.service.getCuentas();
         var out = Security.login(cuentas, username,password);
-        switch(out.charAt(0)){
-            case 'U': success("Login exitoso! :)",out); break;
-            default: showError("Error en login :(",out); break;
+        if(out.charAt(0)=='U'){
+            success("Login exitoso! :)",out);
+            App.user = App.service.getCuentas().stream().filter(cuenta -> cuenta.getUsername().equals(username)).findFirst().get();
+            App.stage.setScene(new Scene(new InicioController().getView()));
+            App.stage.show();
+        } else {
+            showError("Error en login :(",out);
         }
     }
 
