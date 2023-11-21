@@ -3,6 +3,7 @@ package aed.practica2.backend.models;
 import aed.practica2.backend.utils.Security;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -16,13 +17,18 @@ public class Cuenta implements Serializable{
     private String profileImage;
     private Roles rol;
 
-    public Cuenta(String username, String password, String email, String profileImage, Roles rol) {
+    private ArrayList<Producto> juegosAdquiridos;
+
+    public int[] juegosFavoritos;
+
+    public Cuenta(String username, String password, String email, String profileImage, Roles rol, ArrayList<Producto> juegosAdquiridos) {
         this.username = username;
         setPassword(password);
         this.email = email;
         this.profileImage = profileImage;
         if(rol==null) this.rol = Roles.USER;
         else this.rol = rol;
+        if(juegosAdquiridos!=null)this.juegosAdquiridos = juegosAdquiridos;
     }
 
     public Cuenta(){ }
@@ -64,27 +70,24 @@ public class Cuenta implements Serializable{
         this.profileImage = profileImage;
     }
 
+    public ArrayList<Producto> getJuegosAdquiridos() {
+        return juegosAdquiridos;
+    }
+
+    public void setJuegosAdquiridos(ArrayList<Producto> juegosAdquiridos) {
+        this.juegosAdquiridos = juegosAdquiridos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cuenta cuenta = (Cuenta) o;
-        return Objects.equals(username, cuenta.username) && Objects.equals(password, cuenta.password) && Objects.equals(email, cuenta.email) && Objects.equals(profileImage, cuenta.profileImage) && rol == cuenta.rol;
+        return Objects.equals(username, cuenta.username) && Objects.equals(password, cuenta.password) && Objects.equals(email, cuenta.email) && Objects.equals(profileImage, cuenta.profileImage) && rol == cuenta.rol && Objects.equals(juegosAdquiridos, cuenta.juegosAdquiridos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, email, profileImage, rol);
-    }
-
-    @Override
-    public String toString() {
-        return "Cuenta{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", profileImage='" + profileImage + '\'' +
-                ", rol=" + rol +
-                '}';
+        return Objects.hash(username, password, email, profileImage, rol, juegosAdquiridos);
     }
 }

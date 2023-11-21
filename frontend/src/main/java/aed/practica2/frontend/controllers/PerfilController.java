@@ -26,6 +26,12 @@ public class PerfilController implements Initializable {
     @FXML
     private Label userNameLabel;
 
+    @FXML
+    private ImageView juegoFav1, juegoFav2;
+
+    @FXML
+    private Label totalJuegos;
+
     public PerfilController(){
         try{
             FXMLLoader f = new FXMLLoader(getClass().getResource("/perfil.fxml"));
@@ -35,6 +41,32 @@ public class PerfilController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void setFavGames(){
+        var juegos = App.user.getJuegosAdquiridos();
+        if(App.user.juegosFavoritos != null) {
+            var favs = App.user.juegosFavoritos;
+            var fav1 =juegos.stream().filter(juego -> juego.getId()==favs[0]).findFirst().get();
+            if (App.user.juegosFavoritos.length > 1) {
+                var fav2 = juegos.stream().filter(juego -> juego.getId() == favs[1]).findFirst().get();
+                juegoFav1.setImage(new Image(fav1.getImagen()));
+                juegoFav2.setImage(new Image(fav2.getImagen()));
+            } else if (App.user.juegosFavoritos.length > 0) {
+                juegoFav1.setImage(new Image(fav1.getImagen()));
+            }
+        }
+    }
+
+    private void changeFavs(){
+        var f = App.user.juegosFavoritos;
+        f = new int[2];
+        //TODO esto xd y vista para seleciconar
+
+
+
+    }
+
+
 
 
     public Pane getView() {
@@ -71,5 +103,6 @@ public class PerfilController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setProfileImage();
         userNameLabel.setText(App.user.getUsername());
+        totalJuegos.setText("" + App.user.getJuegosAdquiridos().size());
     }
 }

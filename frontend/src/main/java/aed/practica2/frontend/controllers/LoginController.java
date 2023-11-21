@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
             showError("Usuario ya existente","El usuario " + existe.get().getUsername() + " ya existe");
         } else {
             //Registro válido
-            var newCuenta = new Cuenta(username, Security.hashPassword(password), "Correo no configurado.", "", Roles.USER);
+            var newCuenta = new Cuenta(username, Security.hashPassword(password), "Correo no configurado.", "", Roles.USER,null);
             App.service.addCuenta(newCuenta);
             success("Usuario registrado correctamente!", "AHora ya puede entrar usando su usuario y contraseña.");
         }

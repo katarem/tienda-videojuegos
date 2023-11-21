@@ -15,9 +15,17 @@ public class Producto implements Serializable {
 
     private List<Generos> generos;
 
-    private int cantidad;
+    private String imagen;
 
-    public Producto(){this.id = 0; this.cantidad = 1;}
+    public Producto(){this.id = 0;}
+
+    public Producto(String nombre, int id, double precio, List<Generos> generos, String imagen) {
+        this.nombre = nombre;
+        this.id = id;
+        this.precio = precio;
+        this.generos = generos;
+        this.imagen = imagen;
+    }
 
     public String getNombre() {
         return nombre;
@@ -52,12 +60,12 @@ public class Producto implements Serializable {
         this.generos = generos;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     @Override
@@ -65,12 +73,12 @@ public class Producto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Producto producto = (Producto) o;
-        return id == producto.id && Double.compare(precio, producto.precio) == 0 && cantidad == producto.cantidad && Objects.equals(nombre, producto.nombre) && Objects.equals(generos, producto.generos);
+        return id == producto.id && Double.compare(precio, producto.precio) == 0 && Objects.equals(nombre, producto.nombre) && Objects.equals(generos, producto.generos) && Objects.equals(imagen, producto.imagen);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, id, precio, generos, cantidad);
+        return Objects.hash(nombre, id, precio, generos, imagen);
     }
 
     @Override
@@ -80,7 +88,7 @@ public class Producto implements Serializable {
                 ", id=" + id +
                 ", precio=" + precio +
                 ", generos=" + generos +
-                ", cantidad=" + cantidad +
+                ", imagen='" + imagen + '\'' +
                 '}';
     }
 }

@@ -27,7 +27,7 @@ public class App extends Application {
     }
     //Para asegurarnos que siempre se persisten los datos.
     public static void exit(){
-        service.addCuenta(App.user);
+        if(App.user!=null)service.addCuenta(App.user);
         service.close();
         App.stage.close();
     }

@@ -23,12 +23,12 @@
          </font>
       </Label>
       <Label layoutX="498.0" layoutY="468.0" text="Totlal de juegos" />
-      <Label fx:id="totalJuegos" alignment="CENTER" layoutX="525.0" layoutY="499.0" prefHeight="17.0" prefWidth="31.0" text="0" />
-      <ImageView fx:id="juegoFav1" fitHeight="195.0" fitWidth="168.0" layoutX="26.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+      <Label alignment="CENTER" layoutX="525.0" layoutY="499.0" prefHeight="17.0" prefWidth="31.0" text="0" />
+      <ImageView fitHeight="195.0" fitWidth="168.0" layoutX="26.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/juego2.jpg" />
          </image></ImageView>
-      <ImageView fx:id="juegoFav2" fitHeight="195.0" fitWidth="168.0" layoutX="222.0" layoutY="440.0" pickOnBounds="true">
+      <ImageView fitHeight="195.0" fitWidth="168.0" layoutX="222.0" layoutY="440.0" pickOnBounds="true">
          <image>
             <Image url="@img/juego3.jpg" />
          </image></ImageView>
@@ -39,7 +39,6 @@
             <Image url="@img/rango.jpg" />
          </image></ImageView>
       <Button layoutX="516.0" layoutY="597.0" mnemonicParsing="false" onAction="#back" text="Volver" />
-      <Button layoutX="468.0" layoutY="526.0" mnemonicParsing="false" onAction="#changeProfileImage" text="Cambiar foto de perfil" />
-      <Button layoutX="458.0" layoutY="559.0" mnemonicParsing="false" onAction="#changeFavs" text="Cambiar juegos favoritos" />
+      <Button layoutX="470.0" layoutY="548.0" mnemonicParsing="false" onAction="#changeProfileImage" text="Cambiar foto de perfil" />
    </children>
 </Pane>
