@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
@@ -55,19 +57,11 @@ public class PerfilController implements Initializable {
                 juegoFav1.setImage(new Image(fav1.getImagen()));
             }
         }
+        else if(juegos.size()>=2){
+            juegoFav1.setImage(new Image(juegos.get(0).getImagen()));
+            juegoFav2.setImage(new Image(juegos.get(1).getImagen()));
+        }
     }
-
-    private void changeFavs(){
-        var f = App.user.juegosFavoritos;
-        f = new int[2];
-        //TODO esto xd y vista para seleciconar
-
-
-
-    }
-
-
-
 
     public Pane getView() {
         return panePrincipal;
@@ -84,7 +78,7 @@ public class PerfilController implements Initializable {
     @FXML
     private void changeProfileImage(){
         TextInputDialog t = new TextInputDialog("Añada el link de la imagen.");
-        t.setContentText("Busque una imagen en la red y copie el link de la misma.");
+        t.setHeaderText("Busque una imagen en la red y copie el link de la misma.");
         t.showAndWait().ifPresent(img -> {
             App.user.setProfileImage(img);
             setProfileImage();
@@ -103,6 +97,6 @@ public class PerfilController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setProfileImage();
         userNameLabel.setText(App.user.getUsername());
-        totalJuegos.setText("" + App.user.getJuegosAdquiridos().size());
+        totalJuegos.setText("" + (App.user.getJuegosAdquiridos() == null ? 0 : App.user.getJuegosAdquiridos().size()));
     }
 }

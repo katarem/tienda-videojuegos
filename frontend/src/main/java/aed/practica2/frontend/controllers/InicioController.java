@@ -51,6 +51,12 @@ public class InicioController implements Initializable {
         App.stage.show();
     }
 
+    @FXML
+    private void goToTienda(){
+        App.stage.setTitle("TIENDA");
+        App.stage.setScene(new Scene(new TiendaController().getView()));
+    }
+
 
     private void setProfileImage(){
         var pfp = App.user.getProfileImage();

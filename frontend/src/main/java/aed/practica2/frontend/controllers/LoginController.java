@@ -4,6 +4,7 @@ import aed.practica2.backend.models.Cuenta;
 import aed.practica2.backend.models.Roles;
 import aed.practica2.backend.utils.Security;
 import aed.practica2.frontend.App;
+import aed.practica2.frontend.Compontents.Alerts;
 import aed.practica2.frontend.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,12 +53,12 @@ public class LoginController implements Initializable {
         var cuentas = App.service.getCuentas();
         var out = Security.login(cuentas, username,password);
         if(out.charAt(0)=='U'){
-            success("Login exitoso! :)",out);
+            Alerts.success("Login exitoso! :)",out);
             App.user = App.service.getCuentas().stream().filter(cuenta -> cuenta.getUsername().equals(username)).findFirst().get();
             App.stage.setScene(new Scene(new InicioController().getView()));
             App.stage.show();
         } else {
-            showError("Error en login :(",out);
+            Alerts.showError("Error en login :(",out);
         }
     }
 
@@ -73,29 +74,17 @@ public class LoginController implements Initializable {
                 .findFirst();
 
         if(existe.isPresent()){
-            showError("Usuario ya existente","El usuario " + existe.get().getUsername() + " ya existe");
+            Alerts.showError("Usuario ya existente","El usuario " + existe.get().getUsername() + " ya existe");
         } else {
             //Registro válido
             var newCuenta = new Cuenta(username, Security.hashPassword(password), "Correo no configurado.", "", Roles.USER,null);
             App.service.addCuenta(newCuenta);
-            success("Usuario registrado correctamente!", "AHora ya puede entrar usando su usuario y contraseña.");
+            Alerts.success("Usuario registrado correctamente!", "AHora ya puede entrar usando su usuario y contraseña.");
         }
     }
 
 
-    private void showError(String title, String message){
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setTitle(title);
-        a.setContentText(message);
-        a.showAndWait();
-    }
 
-    private void success(String title, String message){
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setTitle(title);
-        a.setContentText(message);
-        a.showAndWait();
-    }
 
     @FXML
     private MediaView mediaVideo;

@@ -20,7 +20,7 @@
       <VBox layoutX="466.0" layoutY="199.0" prefHeight="345.0" prefWidth="155.0">
          <children>
             <Button mnemonicParsing="false" onAction="#goToPerfil" prefHeight="47.0" prefWidth="155.0" text="PERFIL" />
-            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="155.0" text="TIENDA">
+            <Button mnemonicParsing="false" onAction="#goToTienda" prefHeight="47.0" prefWidth="155.0" text="TIENDA">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Button>

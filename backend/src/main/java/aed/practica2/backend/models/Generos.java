@@ -20,6 +20,7 @@ public enum Generos {
     Carreras,
     Battle_Royale,
     Realidad_Virtual,
-    Sandbox
+    Sandbox,
+    TODOS
 
 }

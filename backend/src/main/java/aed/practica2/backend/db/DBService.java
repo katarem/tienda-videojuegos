@@ -35,7 +35,7 @@ public class DBService implements IDBService {
     @Override
     public void addProducto(Producto p) {
         if(!existeProducto(p)){
-            if(p.getId() == 0) p.setId(productos.size());
+            if(p.getId() == 0) p.setId(productos.size()+1);
             this.productos.add(p);
         }
     }

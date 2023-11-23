@@ -38,8 +38,7 @@
          <image>
             <Image url="@img/rango.jpg" />
          </image></ImageView>
-      <Button layoutX="516.0" layoutY="597.0" mnemonicParsing="false" onAction="#back" text="Volver" />
+      <Button layoutX="512.0" layoutY="564.0" mnemonicParsing="false" onAction="#back" text="Volver" />
       <Button layoutX="468.0" layoutY="526.0" mnemonicParsing="false" onAction="#changeProfileImage" text="Cambiar foto de perfil" />
-      <Button layoutX="458.0" layoutY="559.0" mnemonicParsing="false" onAction="#changeFavs" text="Cambiar juegos favoritos" />
    </children>
 </Pane>
