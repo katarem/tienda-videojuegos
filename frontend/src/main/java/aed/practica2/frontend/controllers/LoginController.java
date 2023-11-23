@@ -47,43 +47,67 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void login(){
-        var username = textFieldUsername.getText();
-        var password = textFieldPassword.getText();
-        var cuentas = App.service.getCuentas();
-        var out = Security.login(cuentas, username,password);
-        if(out.charAt(0)=='U'){
-            Alerts.success("Login exitoso! :)",out);
-            App.user = App.service.getCuentas().stream().filter(cuenta -> cuenta.getUsername().equals(username)).findFirst().get();
-            App.stage.setScene(new Scene(new InicioController().getView()));
-            App.stage.show();
-        } else {
-            Alerts.showError("Error en login :(",out);
+    private void login() {
+        try {
+            var username = textFieldUsername.getText();
+            var password = textFieldPassword.getText();
+
+            // Verificar si los campos están vacíos
+            if (username.isEmpty() || password.isEmpty()) {
+                throw new IllegalArgumentException("Los campos están vacíos. Por favor, completa ambos campos.");
+            }
+
+            var cuentas = App.service.getCuentas();
+            var out = Security.login(cuentas, username, password);
+
+            if (out.charAt(0) == 'U') {
+                Alerts.success("Login exitoso! :)", out);
+                App.user = App.service.getCuentas().stream().filter(cuenta -> cuenta.getUsername().equals(username)).findFirst().get();
+                App.stage.setScene(new Scene(new InicioController().getView()));
+                App.stage.show();
+            } else {
+                Alerts.showError("Error en login :(", out);
+            }
+        } catch (IllegalArgumentException e) {
+            // Manejar la excepción de campos vacíos
+            Alerts.showError("Error en login :(", e.getMessage());
         }
     }
+
 
     @FXML
-    private void register(){
-        var username = textFieldUsername.getText();
-        var password = textFieldPassword.getText();
+    private void register() {
+        try {
+            var username = textFieldUsername.getText();
+            var password = textFieldPassword.getText();
 
-        System.out.println("Comprobando existencias...");
-        //Usuario existe?
-        var existe = App.service.getCuentas().stream()
-                .filter(cuenta -> cuenta.getUsername().equals(username))
-                .findFirst();
+            if (username.isEmpty() || password.isEmpty()) {
+                throw new CamposVaciosException("Debes rellenar todas las casillas.");
+            }
 
-        if(existe.isPresent()){
-            Alerts.showError("Usuario ya existente","El usuario " + existe.get().getUsername() + " ya existe");
-        } else {
-            //Registro válido
-            var newCuenta = new Cuenta(username, Security.hashPassword(password), "Correo no configurado.", "", Roles.USER,null);
-            App.service.addCuenta(newCuenta);
-            Alerts.success("Usuario registrado correctamente!", "AHora ya puede entrar usando su usuario y contraseña.");
+            System.out.println("Comprobando existencias...");
+            // Usuario existe?
+            var existe = App.service.getCuentas().stream()
+                    .filter(cuenta -> cuenta.getUsername().equals(username))
+                    .findFirst();
+
+            if (existe.isPresent()) {
+                throw new UsuarioExistenteException("El usuario " + existe.get().getUsername() + " ya existe");
+            } else {
+                // Registro válido
+                var newCuenta = new Cuenta(username, Security.hashPassword(password), "Correo no configurado.", "", Roles.USER, null);
+                App.service.addCuenta(newCuenta);
+                Alerts.success("Usuario registrado correctamente!", "Ahora ya puede entrar usando su usuario y contraseña.");
+            }
+        } catch (CamposVaciosException e) {
+            Alerts.showError("Campos vacíos", e.getMessage());
+        } catch (UsuarioExistenteException e) {
+            Alerts.showError("Error al registrar usuario", e.getMessage());
+        } catch (Exception e) {
+            Alerts.showError("Error desconocido", "Se ha producido un error al procesar el registro.");
+            e.printStackTrace();
         }
     }
-
-
 
 
     @FXML
@@ -104,6 +128,20 @@ public class LoginController implements Initializable {
     @FXML
     public Pane getView(){
         return panePrincipal;
+    }
+
+    public class UsuarioExistenteException extends Exception {
+
+        public UsuarioExistenteException(String message) {
+            super(message);
+        }
+    }
+
+    public class CamposVaciosException extends Exception {
+
+        public CamposVaciosException(String message) {
+            super(message);
+        }
     }
 
 }

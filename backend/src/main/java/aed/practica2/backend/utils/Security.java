@@ -24,11 +24,33 @@ public class Security {
         }
     }
 
-    public static String login(List<Cuenta> users, String username, String password){
-        var usuarioExiste = users.stream().filter(user -> user.getUsername().equals(username)).findFirst();
-        if(usuarioExiste.isEmpty()) return "No existe cuenta con ese username.";
-        else if(usuarioExiste.get().getPassword().equals(hashPassword(password))) return "Usuario logeado! bienvenido " + usuarioExiste.get().getEmail();
-        else return "Contraseña incorrecta";
+    public static String login(List<Cuenta> users, String username, String password) {
+        try {
+            var usuarioExiste = users.stream().filter(user -> user.getUsername().equals(username)).findFirst();
+            if (usuarioExiste.isEmpty()) {
+                throw new UsuarioNoExistenteException("No existe cuenta con ese username.");
+            } else if (usuarioExiste.get().getPassword().equals(hashPassword(password))) {
+                return "Usuario logeado! Bienvenido " + usuarioExiste.get().getEmail();
+            } else {
+                throw new ContraseñaIncorrectaException("Contraseña incorrecta");
+            }
+        } catch (UsuarioNoExistenteException e) {
+            return e.getMessage();
+        } catch (ContraseñaIncorrectaException e) {
+            return e.getMessage();
+        }
+    }
+
+    static class UsuarioNoExistenteException extends Exception {
+        public UsuarioNoExistenteException(String message) {
+            super(message);
+        }
+    }
+
+    static class ContraseñaIncorrectaException extends Exception {
+        public ContraseñaIncorrectaException(String message) {
+            super(message);
+        }
     }
 
 

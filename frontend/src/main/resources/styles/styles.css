@@ -15,3 +15,30 @@
 #buttonRegister:hover {
     -fx-background-color: #e3c2fd;
 }
+
+#goToPerfil {
+    -fx-background-color: #9797fb;
+    -fx-text-fill: white;
+}
+
+#goToPerfil:hover {
+    -fx-background-color: #e3c2fd;
+}
+
+#volver {
+    -fx-background-color: #9797fb;
+    -fx-text-fill: white;
+}
+
+#volver:hover {
+    -fx-background-color: #e3c2fd;
+}
+
+#cambio {
+    -fx-background-color: #9797fb;
+    -fx-text-fill: white;
+}
+
+#cambio:hover {
+    -fx-background-color: #e3c2fd;
+}

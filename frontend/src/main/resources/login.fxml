@@ -14,8 +14,18 @@
 <Pane fx:id="panePrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MediaView fx:id="mediaVideo" fitWidth="1000.0" layoutX="-10.0" />
-      <VBox layoutX="350.0" layoutY="126.0" opacity="0.94" prefHeight="344.0" prefWidth="280.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+      <VBox layoutX="699.0" layoutY="-5.0" opacity="0.92" prefHeight="551.0" prefWidth="280.0" style="-fx-background-color: white;">
          <children>
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="279.0" style="-fx-text-fill: #E4CEF2;" text="FHELIOS COMPANY">
+               <font>
+                  <Font name="Gentium Basic Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="286.0" style="-fx-text-fill: B0B0B0;" text="comienza tu aventura">
+               <font>
+                  <Font name="Gentium Basic" size="15.0" />
+               </font>
+            </Label>
             <Label prefHeight="27.0" prefWidth="249.0" style="-fx-text-fill: B79FC7;" text="Username">
                <VBox.margin>
                   <Insets left="15.0" top="20.0" />
@@ -80,16 +90,9 @@
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets top="70.0" />
+         </padding>
       </VBox>
-      <Label alignment="CENTER" layoutX="353.0" layoutY="50.0" prefHeight="35.0" prefWidth="279.0" style="-fx-text-fill: #E4CEF2;" text="FHELIOS COMPANY">
-         <font>
-            <Font name="Gentium Basic Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="421.0" layoutY="85.0" style="-fx-text-fill: white;" text="comienza tu aventura">
-         <font>
-            <Font name="Gentium Basic" size="15.0" />
-         </font>
-      </Label>
    </children>
 </Pane>
