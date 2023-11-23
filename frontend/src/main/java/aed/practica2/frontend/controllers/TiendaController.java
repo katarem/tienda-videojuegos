@@ -96,30 +96,67 @@ public class TiendaController implements Initializable {
     }
 
     @FXML
-    private void insertGame(){
-        try{
+    private void insertGame() {
+        try {
             var gameName = nameLabel.getText();
             var precio = precioLabel.getText();
+
+            if (gameName.isEmpty() || precio.isEmpty()) {
+                throw new CamposVaciosException("Nombre y precio no pueden estar vacíos");
+            }
+
+            try {
+                double parsedPrecio = Double.parseDouble(precio);
+            } catch (NumberFormatException e) {
+                throw new PrecioInvalidoException("El precio debe ser un número válido");
+            }
+
+            if (!gameName.matches("^[a-zA-Z0-9 ]*$")) {
+                throw new TituloInvalidoException("El título no puede contener caracteres especiales");
+            }
+
             ArrayList<Generos> generos = new ArrayList<>();
 
             var generosValues = Arrays.stream(generosLabel.getText().split(",")).toList();
             generosValues.forEach(value -> {
-                try{
+                try {
                     var genero = Generos.valueOf(value);
                     generos.add(genero);
-                } catch(IllegalArgumentException ignored){}
+                } catch (IllegalArgumentException e) {
+                    Alerts.showError("Género no existe", e.getMessage());
+                }
             });
-            if(nuevoJuego == null) nuevoJuego = new Producto();
+
+            if (nuevoJuego == null) nuevoJuego = new Producto();
             nuevoJuego.setNombre(gameName);
             nuevoJuego.setPrecio(Double.parseDouble(precio));
             nuevoJuego.setGeneros(generos);
             App.service.addProducto(nuevoJuego);
             updateGames();
-        } catch(Exception e){
-            //TODO excepcion personalizada si no has puesto todos los datos
-            Alerts.showError("juego no agregado",e.getMessage());
+        } catch (CamposVaciosException | PrecioInvalidoException | TituloInvalidoException e) {
+            Alerts.showError("Error al agregar juego", e.getMessage());
+        } catch (Exception e) {
+            Alerts.showError("Error general", e.getMessage());
         }
+    }
 
+
+
+    public class TituloInvalidoException extends Exception {
+        public TituloInvalidoException(String message) {
+            super(message);
+        }
+    }
+
+    public class PrecioInvalidoException extends Exception {
+        public PrecioInvalidoException(String message) {
+            super(message);
+        }
+    }
+    public class CamposVaciosException extends Exception {
+        public CamposVaciosException(String message) {
+            super(message);
+        }
     }
 
     @FXML
