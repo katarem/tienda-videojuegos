@@ -44,25 +44,6 @@ public class PerfilController implements Initializable {
         }
     }
 
-    private void setFavGames(){
-        var juegos = App.user.getJuegosAdquiridos();
-        if(App.user.juegosFavoritos != null) {
-            var favs = App.user.juegosFavoritos;
-            var fav1 =juegos.stream().filter(juego -> juego.getId()==favs[0]).findFirst().get();
-            if (App.user.juegosFavoritos.length > 1) {
-                var fav2 = juegos.stream().filter(juego -> juego.getId() == favs[1]).findFirst().get();
-                juegoFav1.setImage(new Image(fav1.getImagen()));
-                juegoFav2.setImage(new Image(fav2.getImagen()));
-            } else if (App.user.juegosFavoritos.length > 0) {
-                juegoFav1.setImage(new Image(fav1.getImagen()));
-            }
-        }
-        else if(juegos.size()>=2){
-            juegoFav1.setImage(new Image(juegos.get(0).getImagen()));
-            juegoFav2.setImage(new Image(juegos.get(1).getImagen()));
-        }
-    }
-
     public Pane getView() {
         return panePrincipal;
     }

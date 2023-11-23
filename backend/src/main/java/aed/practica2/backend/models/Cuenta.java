@@ -19,7 +19,6 @@ public class Cuenta implements Serializable{
 
     private ArrayList<Producto> juegosAdquiridos;
 
-    public int[] juegosFavoritos;
 
     public Cuenta(String username, String password, String email, String profileImage, Roles rol, ArrayList<Producto> juegosAdquiridos) {
         this.username = username;
@@ -29,9 +28,12 @@ public class Cuenta implements Serializable{
         if(rol==null) this.rol = Roles.USER;
         else this.rol = rol;
         if(juegosAdquiridos!=null)this.juegosAdquiridos = juegosAdquiridos;
+        else this.juegosAdquiridos = new ArrayList<>();
     }
 
-    public Cuenta(){ }
+    public Cuenta(){
+        this.juegosAdquiridos = new ArrayList<>();
+    }
 
     public Roles getRol(){ return rol; }
 
